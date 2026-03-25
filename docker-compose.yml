@@ -9,7 +9,7 @@
 
 services:
   zeroclaw:
-    image: ghcr.io/zeroclaw-labs/zeroclaw:latest
+    image: ghcr.io/zeroclaw-labs/zeroclaw:debian
     # For ARM64 environments where the distroless image exits immediately,
     # switch to the Debian compatibility image instead:
     # image: ghcr.io/zeroclaw-labs/zeroclaw:debian
@@ -24,13 +24,13 @@ services:
     
     environment:
       # Required: Your LLM provider API key
-      - API_KEY=${API_KEY:-}
+      - API_KEY=
       # Or use the prefixed version:
       # - ZEROCLAW_API_KEY=${ZEROCLAW_API_KEY:-}
       
       # Optional: LLM provider (default: openrouter)
       # Options: openrouter, openai, anthropic, ollama
-      - PROVIDER=${PROVIDER:-openrouter}
+      - PROVIDER=openrouter
       
       # Allow public bind inside Docker (required for container networking)
       - ZEROCLAW_ALLOW_PUBLIC_BIND=true
@@ -38,7 +38,7 @@ services:
       - ZEROCLAW_GATEWAY_PORT=${ZEROCLAW_GATEWAY_PORT:-42617}
       
       # Optional: Model override
-      # - ZEROCLAW_MODEL=anthropic/claude-sonnet-4-20250514
+      - ZEROCLAW_MODEL=openrouter/free
       
     volumes:
       # Persist workspace and config (must match WORKDIR/HOME in Dockerfile)
